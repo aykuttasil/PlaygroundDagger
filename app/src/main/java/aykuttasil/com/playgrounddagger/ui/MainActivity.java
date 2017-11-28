@@ -1,13 +1,16 @@
 package aykuttasil.com.playgrounddagger.ui;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
+import android.view.View;
 
 import javax.inject.Inject;
 
+import aykuttasil.com.playgrounddagger.R;
 import aykuttasil.com.playgrounddagger.data.remote.ApiManager;
 import aykuttasil.com.playgrounddagger.di.components.DaggerMainActivityComponent;
 import aykuttasil.com.playgrounddagger.di.components.MainActivityComponent;
@@ -48,6 +51,7 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
 
         MainActivityComponent mainActivityComponent = DaggerMainActivityComponent.builder()
                 .appModule(new AppModule(getApplication()))
@@ -82,6 +86,13 @@ public class MainActivity extends BaseActivity {
                         Log.e("aaa", t.getMessage());
                     }
                 });
+
+        findViewById(R.id.btnProfile).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, ProfileActivity.class));
+            }
+        });
 
 
     }
