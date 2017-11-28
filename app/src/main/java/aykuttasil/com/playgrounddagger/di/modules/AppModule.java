@@ -31,7 +31,7 @@ public class AppModule {
     @Provides
     @Singleton
     Context provideApplicationContext() {
-        return this.app;
+        return this.app.getApplicationContext();
     }
 
     @Provides

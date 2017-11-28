@@ -10,6 +10,7 @@ import javax.inject.Inject;
 
 import aykuttasil.com.playgrounddagger.data.remote.ApiManager;
 import aykuttasil.com.playgrounddagger.di.components.DaggerMainActivityComponent;
+import aykuttasil.com.playgrounddagger.di.components.MainActivityComponent;
 import aykuttasil.com.playgrounddagger.di.modules.ActivityModule;
 import aykuttasil.com.playgrounddagger.di.modules.AppModule;
 import aykuttasil.com.playgrounddagger.di.modules.NetModule;
@@ -48,13 +49,13 @@ public class MainActivity extends BaseActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        DaggerMainActivityComponent.builder()
+        MainActivityComponent mainActivityComponent = DaggerMainActivityComponent.builder()
                 .appModule(new AppModule(getApplication()))
                 .activityModule(new ActivityModule(this))
                 .netModule(new NetModule("baseUrl"))
-                .build()
-                .inject(this);
+                .build();
 
+        mainActivityComponent.inject(this);
 
         Log.i("aaa", okHttpClient.toString());
 
@@ -81,6 +82,7 @@ public class MainActivity extends BaseActivity {
                         Log.e("aaa", t.getMessage());
                     }
                 });
+
 
     }
 }
