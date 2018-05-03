@@ -11,7 +11,6 @@ import retrofit2.http.Path
 
 
 interface ApiService {
-
     @GET("users/{username}")
     fun getUser(@Path("username") username: String): Call<User>
 }
